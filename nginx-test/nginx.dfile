@@ -1,0 +1,12 @@
+# fundamental instructions
+ARG VERSION=1.22.1
+FROM nginx:${VERSION}
+
+# configuration instruction
+ADD https://cdn.mos.cms.futurecdn.net/4qNfmM5fuedTF6peFDNi3g-650-80.jpg.webp ./
+WORKDIR /usr/share/nginx/html
+ARG NUM=1
+COPY ./nginx-${NUM}/index.html ./index.html
+
+# execution instruction
+ENTRYPOINT ["nginx", "-g", "daemon off;"]

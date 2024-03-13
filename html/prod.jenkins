@@ -1,0 +1,14 @@
+# base image
+FROM nginx:latest
+
+# set the working directory
+WORKDIR /usr/share/nginx/html
+
+# copy from local to docker environment
+COPY index.html .
+
+# expose docker container port
+EXPOSE 80
+
+# run service nginx
+CMD ["nginx", "-g", "daemon off;"]
