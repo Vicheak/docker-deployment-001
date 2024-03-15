@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Do you want to backup or restore a volume? (Enter 1 for backup, 2 for restore)"
+echo "Do you want to backup or restore a volume? (Enter 1 for backup or 2 for restore)"
 read action
 
 backup_path="/home/vicheak/docker/backup"  # Ensure this path is correct and accessible
@@ -12,7 +12,8 @@ if [ "$action" == "1" ]; then
         echo "Volume name cannot be empty!"
         exit 1
     fi
-    backup_filename="${backup_path}/${volume_name}_backup_$(date +%Y%m%d).tar.gz"
+    # backup_filename="${backup_path}/${volume_name}_backup_$(date +%Y%m%d).tar.gz"
+    backup_filename="${backup_path}/${volume_name}_backup.tar.gz"
     docker run --rm -v ${volume_name}:/volume -v ${backup_path}:/backup alpine tar czf /backup/$(basename "${backup_filename}") -C /volume ./
     echo "Backup of ${volume_name} completed. File: ${backup_filename}"
 elif [ "$action" == "2" ]; then
